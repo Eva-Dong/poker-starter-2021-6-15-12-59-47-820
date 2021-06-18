@@ -202,7 +202,7 @@ public class Poker {
             handsCategory = "OnePair";
         } else if (isTwoPair(hands)) { //两对
             handsCategory = "TwoPair";
-        } else if (getDistinctNumbersCount(getHandsNumbers(hands)) == 3){ //三个数字相同，另外两个数字不同——三条
+        } else if (isThreeOfAKind(hands)){ //三个数字相同，另外两个数字不同——三条
             handsCategory = "ThreeOfAKind";
         } else if ((getHandsNumbers(hands)[0] != getHandsNumbers(hands)[1] || getHandsNumbers(hands)[3] != getHandsNumbers(hands)[4])
                 && getDistinctNumbersCount(getHandsNumbers(hands)) < 3) { //三个数字相同，另外两个数字相同——葫芦
@@ -211,6 +211,10 @@ public class Poker {
             handsCategory = "FullHouse";
         }
         return handsCategory;
+    }
+
+    private boolean isThreeOfAKind(String hands) {
+        return getDistinctNumbersCount(getHandsNumbers(hands)) == 3;
     }
 
     private boolean isTwoPair(String hands) {

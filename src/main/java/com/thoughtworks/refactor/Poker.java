@@ -161,6 +161,7 @@ public class Poker {
 
     private int[] descendingSort(int[] handsNumbers) {
         Map<Integer, Integer> map = getDistinctMap(handsNumbers);
+        map = getDistinctNumbers(handsNumbers);
         List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>();
         list.addAll(map.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {

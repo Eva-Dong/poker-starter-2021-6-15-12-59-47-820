@@ -1,6 +1,7 @@
 package com.thoughtworks.refactor;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Poker {
     public String compareResult(String blackHands, String whiteHands) {
@@ -186,6 +187,12 @@ public class Poker {
             }
         }
         return map;
+    }
+
+    private Map<Integer, Integer> getDistinctNumbers(int[] handsNumbers) {
+        return Arrays.stream(handsNumbers)
+                .boxed()
+                .collect(Collectors.groupingBy(number -> number, Collectors.reducing(0, number -> 1, Integer::sum)));
     }
 
     //先获得数组中每个元素出现的次数，然后再进行计算出现次数大于1的和出现次数等于1的

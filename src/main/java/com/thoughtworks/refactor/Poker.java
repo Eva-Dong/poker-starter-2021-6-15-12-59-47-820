@@ -192,7 +192,7 @@ public class Poker {
 
         if (isStraightFlush(hands)) { //五个相邻的数字且花色一样——同花顺
             handsCategory = "StraightFlush";
-        } else if (getHandsNumbers(hands)[0] - getHandsNumbers(hands)[4] == 4 && (getDistinctNumbersCount(getHandsNumbers(hands)) == 5)) { //五个相邻数字——顺子
+        } else if (isStraight(hands)) { //五个相邻数字——顺子
             handsCategory = "Straight";
         } else if (getSuitsCount(hands) == 1 && getDistinctNumbersCount(getHandsNumbers(hands)) == 5) { //同一花色——同花
             handsCategory = "Flush";
@@ -213,6 +213,10 @@ public class Poker {
             handsCategory = "FullHouse";
         }
         return handsCategory;
+    }
+
+    private boolean isStraight(String hands) {
+        return getHandsNumbers(hands)[0] - getHandsNumbers(hands)[4] == 4 && (getDistinctNumbersCount(getHandsNumbers(hands)) == 5);
     }
 
     private boolean isStraightFlush(String hands) {

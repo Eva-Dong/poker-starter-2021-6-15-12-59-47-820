@@ -160,8 +160,7 @@ public class Poker {
     }
 
     private int[] descendingSort(int[] handsNumbers) {
-        Map<Integer, Integer> map = getDistinctMap(handsNumbers);
-        map = getDistinctNumbers(handsNumbers);
+        Map<Integer, Integer> map = getDistinctNumbersWithCount(handsNumbers);
         List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>();
         list.addAll(map.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
@@ -178,19 +177,7 @@ public class Poker {
         return arrayresult;
     }
 
-    private Map<Integer, Integer> getDistinctMap(int[] handsNumbers) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for (int i = 0; i < handsNumbers.length; i++) {
-            if (map.get(handsNumbers[i]) != null) {
-                map.put(handsNumbers[i], map.get(handsNumbers[i]) + 1);
-            } else {
-                map.put(handsNumbers[i], 1);
-            }
-        }
-        return map;
-    }
-
-    private Map<Integer, Integer> getDistinctNumbers(int[] handsNumbers) {
+    private Map<Integer, Integer> getDistinctNumbersWithCount(int[] handsNumbers) {
         return Arrays.stream(handsNumbers)
                 .boxed()
                 .collect(Collectors.groupingBy(number -> number, Collectors.reducing(0, number -> 1, Integer::sum)));
@@ -198,7 +185,7 @@ public class Poker {
 
     //先获得数组中每个元素出现的次数，然后再进行计算出现次数大于1的和出现次数等于1的
     private int[] noOrRepeatNumber(int[] handsNumbers, int flag) {
-        Map<Integer, Integer> map = getDistinctMap(handsNumbers);
+        Map<Integer, Integer> map = getDistinctNumbersWithCount(handsNumbers);
         List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>();
         list.addAll(map.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {

@@ -206,10 +206,14 @@ public class Poker {
             handsCategory = "ThreeOfAKind";
         } else if (isFourOfAKind(hands)) { //三个数字相同，另外两个数字相同——葫芦
             handsCategory = "FourOfAKind";
-        } else if (getDistinctNumbersCount(getHandsNumbers(hands)) < 3){ //四个数字相同——铁支
+        } else if (isFullHouse(hands)){ //四个数字相同——铁支
             handsCategory = "FullHouse";
         }
         return handsCategory;
+    }
+
+    private boolean isFullHouse(String hands) {
+        return getDistinctNumbersCount(getHandsNumbers(hands)) < 3;
     }
 
     private boolean isFourOfAKind(String hands) {

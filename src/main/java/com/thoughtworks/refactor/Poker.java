@@ -12,8 +12,8 @@ public class Poker {
         int[] whiteCardNumbers = convertCardStringToSortedNumbers(whitePlayerCard);
         int blackCardTypeIndex = getCardTypeIndex(blackCardType);
         int whiteCardTypeIndex = getCardTypeIndex(whiteCardType);
-        int[] blackArraySort = getSortedCardNumbers(blackCardNumbers);
-        int[] whiteArraySort = getSortedCardNumbers(whiteCardNumbers);
+        int[] sortedBlackCardNumbers = getSortedCardNumbers(blackCardNumbers);
+        int[] sortedWhiteCardNumbers = getSortedCardNumbers(whiteCardNumbers);
         int[] blackRepeat = noOrRepeatNumber(blackCardNumbers, 0);
         int[] whiteRepeat = noOrRepeatNumber(whiteCardNumbers, 0);
         int[] blackNoRepeat = noOrRepeatNumber(blackCardNumbers, 1);
@@ -34,19 +34,19 @@ public class Poker {
                     winResult = "tie";
                 }
             } else if (blackCardTypeIndex == 1) { //铁支
-                if (blackArraySort[0] < whiteArraySort[0]) {
-                    String sig = intNumber(whiteArraySort[0]);
+                if (sortedBlackCardNumbers[0] < sortedWhiteCardNumbers[0]) {
+                    String sig = intNumber(sortedWhiteCardNumbers[0]);
                     winResult = "white wins - high card:" + sig;
                 } else {
-                    String sig = intNumber(blackArraySort[0]);
+                    String sig = intNumber(sortedBlackCardNumbers[0]);
                     winResult = "black wins - high card:" + sig;
                 }
             } else if (blackCardTypeIndex == 2) { //葫芦
-                if (blackArraySort[0] < whiteArraySort[0]) {
-                    String sig = intNumber(whiteArraySort[0]);
+                if (sortedBlackCardNumbers[0] < sortedWhiteCardNumbers[0]) {
+                    String sig = intNumber(sortedWhiteCardNumbers[0]);
                     winResult = "white wins - high card:" + sig;
                 } else {
-                    String sig = intNumber(blackArraySort[0]);
+                    String sig = intNumber(sortedBlackCardNumbers[0]);
                     winResult = "black wins - high card:" + sig;
                 }
             } else if (blackCardTypeIndex == 3) { //同花

@@ -189,18 +189,11 @@ public class Poker {
     //判断是什么牌
     private String getHandsCategory(String hands) {
         String handsCategory = "";
-        String[] strArray = hands.split("");
-        int i;
         int[] number = getHandsNumbers(hands);
+
         HashSet<Integer> distinctNumbers = getDistinctNumbers(number);
-        String[] suit = new String[5];
-        for (i = 0; i < 5; i++) {
-            suit[i] = strArray[i * 3 + 1];
-        }
-        HashSet<String> suits = new HashSet<String>();
-        for (i = 0; i < 5; i++) {
-            suits.add(suit[i]);
-        }
+        HashSet<String> suits = getSuits(hands);
+
         if (distinctNumbers.size() == 5) {
             if ((number[0] - number[4] == 4) && (suits.size() == 1) && (distinctNumbers.size() == 5)) { //五个相邻的数字且花色一样——同花顺
                 handsCategory = "StraightFlush";
@@ -227,6 +220,20 @@ public class Poker {
             }
         }
         return handsCategory;
+    }
+
+    private HashSet<String> getSuits(String hands) {
+        int i;
+        String[] strArray = hands.split("");
+        String[] suit = new String[5];
+        for (i = 0; i < 5; i++) {
+            suit[i] = strArray[i * 3 + 1];
+        }
+        HashSet<String> suits = new HashSet<String>();
+        for (i = 0; i < 5; i++) {
+            suits.add(suit[i]);
+        }
+        return suits;
     }
 
     private HashSet<Integer> getDistinctNumbers(int[] number) {

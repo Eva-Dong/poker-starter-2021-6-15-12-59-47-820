@@ -200,9 +200,7 @@ public class Poker {
             handsCategory = "HighCard";
         } else if (isOnePair(hands)) { //一对相同，其余三个数字不同——对子
             handsCategory = "OnePair";
-        } else if (getDistinctNumbersCount(getHandsNumbers(hands)) == 3 && ((getHandsNumbers(hands)[0] == getHandsNumbers(hands)[1] && getHandsNumbers(hands)[2] == getHandsNumbers(hands)[3])
-                    || (getHandsNumbers(hands)[1] == getHandsNumbers(hands)[2] && getHandsNumbers(hands)[3] == getHandsNumbers(hands)[4])
-                    || (getHandsNumbers(hands)[0] == getHandsNumbers(hands)[1] && getHandsNumbers(hands)[3] == getHandsNumbers(hands)[4]))) { //两对
+        } else if (isTwoPair(hands)) { //两对
             handsCategory = "TwoPair";
         } else if (getDistinctNumbersCount(getHandsNumbers(hands)) == 3){ //三个数字相同，另外两个数字不同——三条
             handsCategory = "ThreeOfAKind";
@@ -213,6 +211,12 @@ public class Poker {
             handsCategory = "FullHouse";
         }
         return handsCategory;
+    }
+
+    private boolean isTwoPair(String hands) {
+        return getDistinctNumbersCount(getHandsNumbers(hands)) == 3 && ((getHandsNumbers(hands)[0] == getHandsNumbers(hands)[1] && getHandsNumbers(hands)[2] == getHandsNumbers(hands)[3])
+                || (getHandsNumbers(hands)[1] == getHandsNumbers(hands)[2] && getHandsNumbers(hands)[3] == getHandsNumbers(hands)[4])
+                || (getHandsNumbers(hands)[0] == getHandsNumbers(hands)[1] && getHandsNumbers(hands)[3] == getHandsNumbers(hands)[4]));
     }
 
     private boolean isOnePair(String hands) {

@@ -7,19 +7,22 @@ import java.util.stream.IntStream;
 public class Poker {
     public String compareResult(String blackHands, String whiteHands) {
         String winResult = "";
-        String blackHandsCategory = getHandsCategory(blackHands);
-        String whiteHandsCategory = getHandsCategory(whiteHands);
         String[] handsCategories = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
+
+        String blackHandsCategory = getHandsCategory(new Hands(blackHands));
         int[] blackHandsNumbers = getDescendingHandsNumbers(blackHands);
-        int[] whiteHandsNumbers = getDescendingHandsNumbers(whiteHands);
         int blackHandsCategoryRank = getHandsCategoryRank(blackHandsCategory);
-        int whiteHandsCategoryRank = getHandsCategoryRank(whiteHandsCategory);
         int[] descendingBlackHandsNumbers = descendingSort(blackHandsNumbers);
-        int[] descendingWhiteHandsNumbers = descendingSort(whiteHandsNumbers);
         int[] repeatBlackHandsNumbers = getRepeatNumbers(blackHandsNumbers);
-        int[] repeatWhiteHandsNumbers = getRepeatNumbers(whiteHandsNumbers);
         int[] noRepeatBlackHandsNumbers = getNoRepeatNumbers(blackHandsNumbers);
+
+        String whiteHandsCategory = getHandsCategory(new Hands(whiteHands));
+        int[] whiteHandsNumbers = getDescendingHandsNumbers(whiteHands);
+        int whiteHandsCategoryRank = getHandsCategoryRank(whiteHandsCategory);
+        int[] descendingWhiteHandsNumbers = descendingSort(whiteHandsNumbers);
+        int[] repeatWhiteHandsNumbers = getRepeatNumbers(whiteHandsNumbers);
         int[] noRepeatWhiteHandsNumbers = getNoRepeatNumbers(whiteHandsNumbers);
+
         if (blackHandsCategoryRank < whiteHandsCategoryRank) {
             winResult = "black wins - " + handsCategories[blackHandsCategoryRank];
         } else if (blackHandsCategoryRank > whiteHandsCategoryRank) {
@@ -186,29 +189,29 @@ public class Poker {
         return index;
     }
 
-    private String getHandsCategory(String hands) {
-        if (isStraightFlush(hands)) {
+    private String getHandsCategory(Hands hands) {
+        if (isStraightFlush(hands.getHands())) {
             return "StraightFlush";
         }
-        if (isStraight(hands)) {
+        if (isStraight(hands.getHands())) {
             return "Straight";
         }
-        if (isFlush(hands)) {
+        if (isFlush(hands.getHands())) {
             return "Flush";
         }
-        if (isHighCard(hands)) {
+        if (isHighCard(hands.getHands())) {
             return "HighCard";
         }
-        if (isOnePair(hands)) {
+        if (isOnePair(hands.getHands())) {
             return "OnePair";
         }
-        if (isTwoPair(hands)) {
+        if (isTwoPair(hands.getHands())) {
             return "TwoPair";
         }
-        if (isThreeOfAKind(hands)) {
+        if (isThreeOfAKind(hands.getHands())) {
             return "ThreeOfAKind";
         }
-        if (isFourOfAKind(hands)) {
+        if (isFourOfAKind(hands.getHands())) {
             return "FourOfAKind";
         }
         return "FullHouse";

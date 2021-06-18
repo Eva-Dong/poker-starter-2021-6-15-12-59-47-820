@@ -204,13 +204,17 @@ public class Poker {
             handsCategory = "TwoPair";
         } else if (isThreeOfAKind(hands)){ //三个数字相同，另外两个数字不同——三条
             handsCategory = "ThreeOfAKind";
-        } else if ((getHandsNumbers(hands)[0] != getHandsNumbers(hands)[1] || getHandsNumbers(hands)[3] != getHandsNumbers(hands)[4])
-                && getDistinctNumbersCount(getHandsNumbers(hands)) < 3) { //三个数字相同，另外两个数字相同——葫芦
+        } else if (isFourOfAKind(hands)) { //三个数字相同，另外两个数字相同——葫芦
             handsCategory = "FourOfAKind";
         } else if (getDistinctNumbersCount(getHandsNumbers(hands)) < 3){ //四个数字相同——铁支
             handsCategory = "FullHouse";
         }
         return handsCategory;
+    }
+
+    private boolean isFourOfAKind(String hands) {
+        return (getHandsNumbers(hands)[0] != getHandsNumbers(hands)[1] || getHandsNumbers(hands)[3] != getHandsNumbers(hands)[4])
+                && getDistinctNumbersCount(getHandsNumbers(hands)) < 3;
     }
 
     private boolean isThreeOfAKind(String hands) {

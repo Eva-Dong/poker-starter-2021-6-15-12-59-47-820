@@ -189,25 +189,27 @@ public class Poker {
     //判断是什么牌
     private String getHandsCategory(String hands) {
         String handsCategory = "";
-        int[] number = getHandsNumbers(hands);
 
-        if ((number[0] - number[4] == 4) && (getSuitsCount(hands) == 1) && (getDistinctNumbersCount(number) == 5)) { //五个相邻的数字且花色一样——同花顺
+        if ((getHandsNumbers(hands)[0] - getHandsNumbers(hands)[4] == 4) && (getSuitsCount(hands) == 1) && (getDistinctNumbersCount(getHandsNumbers(hands)) == 5)) { //五个相邻的数字且花色一样——同花顺
             handsCategory = "StraightFlush";
-        } else if (number[0] - number[4] == 4 && (getDistinctNumbersCount(number) == 5)) { //五个相邻数字——顺子
+        } else if (getHandsNumbers(hands)[0] - getHandsNumbers(hands)[4] == 4 && (getDistinctNumbersCount(getHandsNumbers(hands)) == 5)) { //五个相邻数字——顺子
             handsCategory = "Straight";
-        } else if (getSuitsCount(hands) == 1 && getDistinctNumbersCount(number) == 5) { //同一花色——同花
+        } else if (getSuitsCount(hands) == 1 && getDistinctNumbersCount(getHandsNumbers(hands)) == 5) { //同一花色——同花
             handsCategory = "Flush";
-        } else if (getDistinctNumbersCount(number) == 5){ //五个不相邻的数字——散牌
+        } else if (getDistinctNumbersCount(getHandsNumbers(hands)) == 5){ //五个不相邻的数字——散牌
             handsCategory = "HighCard";
-        } else if (getDistinctNumbersCount(number) == 4) { //一对相同，其余三个数字不同——对子
+        } else if (getDistinctNumbersCount(getHandsNumbers(hands)) == 4) { //一对相同，其余三个数字不同——对子
             handsCategory = "OnePair";
-        } else if (getDistinctNumbersCount(number) == 3 && ((number[0] == number[1] && number[2] == number[3]) || (number[1] == number[2] && number[3] == number[4]) || (number[0] == number[1] && number[3] == number[4]))) { //两对
+        } else if (getDistinctNumbersCount(getHandsNumbers(hands)) == 3 && ((getHandsNumbers(hands)[0] == getHandsNumbers(hands)[1] && getHandsNumbers(hands)[2] == getHandsNumbers(hands)[3])
+                    || (getHandsNumbers(hands)[1] == getHandsNumbers(hands)[2] && getHandsNumbers(hands)[3] == getHandsNumbers(hands)[4])
+                    || (getHandsNumbers(hands)[0] == getHandsNumbers(hands)[1] && getHandsNumbers(hands)[3] == getHandsNumbers(hands)[4]))) { //两对
             handsCategory = "TwoPair";
-        } else if (getDistinctNumbersCount(number) == 3){ //三个数字相同，另外两个数字不同——三条
+        } else if (getDistinctNumbersCount(getHandsNumbers(hands)) == 3){ //三个数字相同，另外两个数字不同——三条
             handsCategory = "ThreeOfAKind";
-        } else if ((number[0] != number[1] || number[3] != number[4]) && getDistinctNumbersCount(number) < 3) { //三个数字相同，另外两个数字相同——葫芦
+        } else if ((getHandsNumbers(hands)[0] != getHandsNumbers(hands)[1] || getHandsNumbers(hands)[3] != getHandsNumbers(hands)[4])
+                && getDistinctNumbersCount(getHandsNumbers(hands)) < 3) { //三个数字相同，另外两个数字相同——葫芦
             handsCategory = "FourOfAKind";
-        } else if (getDistinctNumbersCount(number) < 3){ //四个数字相同——铁支
+        } else if (getDistinctNumbersCount(getHandsNumbers(hands)) < 3){ //四个数字相同——铁支
             handsCategory = "FullHouse";
         }
         return handsCategory;
